@@ -38,6 +38,8 @@ public class Medicos{
     @Embedded
     private Endereco endereco ;
 
+    private String telefone;
+
     public Medicos(MedicoDTO dados) {
         this.id = null;
         this.nome = dados.nome();
@@ -45,5 +47,6 @@ public class Medicos{
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
+        this.telefone = dados.telefone();
     }
 }

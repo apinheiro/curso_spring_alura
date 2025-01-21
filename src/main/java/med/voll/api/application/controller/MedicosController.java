@@ -3,6 +3,7 @@ package med.voll.api.application.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import med.voll.api.application.domain.MedicoDTO;
 import med.voll.api.domain.repository.MedicoRepository;
 
@@ -23,7 +24,7 @@ public class MedicosController {
 
     @PostMapping
     @Transactional
-    public void adicionar(@RequestBody MedicoDTO dadosCadastroMedico) {
+    public void adicionar(@RequestBody @Valid MedicoDTO dadosCadastroMedico) {
         medicoRepository.save(new Medicos(dadosCadastroMedico));
     }
     
