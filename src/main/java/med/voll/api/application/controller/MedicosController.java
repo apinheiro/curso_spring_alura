@@ -7,6 +7,7 @@ import med.voll.api.application.domain.MedicoDTO;
 import med.voll.api.domain.repository.MedicoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,8 +20,9 @@ public class MedicosController {
 
     @Autowired
     private MedicoRepository medicoRepository;
-    
+
     @PostMapping
+    @Transactional
     public void adicionar(@RequestBody MedicoDTO dadosCadastroMedico) {
         medicoRepository.save(new Medicos(dadosCadastroMedico));
     }
