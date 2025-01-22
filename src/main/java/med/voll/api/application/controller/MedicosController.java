@@ -29,13 +29,16 @@ public class MedicosController {
     @Autowired
     private MedicoRepository medicoRepository;
 
+    /**
+     * Adiciona um novo médico ao sistema.
+     * @param MedicoDTO
+     */
     @PostMapping
     @Transactional
     public void adicionar(@RequestBody @Valid MedicoDTO dadosCadastroMedico) {
         medicoRepository.save(MedicoFactory.convertFromDto(dadosCadastroMedico));
     }
     
-    @GetMapping
     /**
      * Lista todos os médicos cadastrados no sistema
      * O retono é uma lista paginada de MedicoDTO, sem a informação do endereço e telefone.
@@ -43,6 +46,7 @@ public class MedicosController {
      * @param pagina
      * @return Page<MedicoDTO>
      */
+    @GetMapping
     public Page<RegistroMedicoDTO> listar(@PageableDefault(sort={"nome"}) Pageable pagina) {
         return medicoRepository.findAllByAtivo(pagina, true)
                   .map(MedicoFactory::convertToRegistroMedico);

@@ -50,6 +50,17 @@ public class Medico{
 
     private Date dataExclusao;
 
+    public Medico(Long id, String nome, String email, String crm, Especialidades especialidade, Endereco endereco, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.crm = crm;
+        this.especialidade = especialidade;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.ativo = true;
+    }
+
 
     public void atualizar(Medico medico) {
         this.nome = medico.getNome() == null ? this.nome : medico.getNome();
