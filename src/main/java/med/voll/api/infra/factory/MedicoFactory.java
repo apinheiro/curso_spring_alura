@@ -11,10 +11,13 @@ import med.voll.api.domain.MedicoBuilder;
 public class MedicoFactory {
 
     public static MedicoDTO convertToDto(Medico medico){
-        return new MedicoDTO(medico.getNome(), 
+        return new MedicoDTO(medico.getId(),
+                             medico.getNome(), 
                              medico.getEmail(), 
                              medico.getCrm(), 
-                             medico.getEspecialidade(), null, null);
+                             medico.getEspecialidade(), 
+                             convertEnderecoDTO(medico.getEndereco()),
+                             medico.getTelefone());
     }
 
     public static RegistroMedicoDTO convertToRegistroMedico(Medico medico){
@@ -50,5 +53,17 @@ public class MedicoFactory {
             .withNumero(enderecoDTO.numero())
             .withBairro(enderecoDTO.bairro())
             .build();
+    }
+
+    private static EnderecoDTO convertEnderecoDTO(Endereco endereco){
+        if (endereco == null) return null;
+
+        return new EnderecoDTO(endereco.getCep(), 
+                               endereco.getLogradouro(), 
+                               endereco.getNumero(), 
+                               endereco.getComplemento(), 
+                               endereco.getBairro(), 
+                               endereco.getCidade(), 
+                               endereco.getUf());
     }
 }

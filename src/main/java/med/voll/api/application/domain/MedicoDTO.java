@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.domain.Especialidades;
 
 public record MedicoDTO(
+    Long medicoId,
+    
     String nome, 
     
     @Email
