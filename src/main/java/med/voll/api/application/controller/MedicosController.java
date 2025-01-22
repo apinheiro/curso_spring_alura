@@ -5,17 +5,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import med.voll.api.application.domain.MedicoDTO;
+import med.voll.api.application.domain.RegistroMedicoDTO;
 import med.voll.api.domain.repository.MedicoRepository;
 import med.voll.api.infra.factory.MedicoDTOFactory;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import med.voll.api.domain.Medicos;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -28,12 +29,19 @@ public class MedicosController {
     @PostMapping
     @Transactional
     public void adicionar(@RequestBody @Valid MedicoDTO dadosCadastroMedico) {
-        medicoRepository.save(new Medicos(dadosCadastroMedico));
+        medicoRepository.save(MedicoDTOFactory.convertFromDto(dadosCadastroMedico));
     }
     
     @GetMapping
-    public List<MedicoDTO> listar() {
-        return medicoRepository.findAll()
-                  .stream().map(MedicoDTOFactory::create).toList();
+/**
+ * Lista todos os médicos cadastrados no sistema
+ * O retono é uma lista paginada de MedicoDTO, sem a informação do endereço e telefone.
+ * 
+ * @param pagina
+ * @return Page<MedicoDTO>
+ */
+    public Page<RegistroMedicoDTO> listar(@PageableDefault(sort={"nome"}) Pageable pagina) {
+        return medicoRepository.findAll(pagina)
+                  .map(MedicoDTOFactory::convertToRegistroMedico);
     }
 }
