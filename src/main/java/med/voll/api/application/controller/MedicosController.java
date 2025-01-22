@@ -44,7 +44,7 @@ public class MedicosController {
      * @return Page<MedicoDTO>
      */
     public Page<RegistroMedicoDTO> listar(@PageableDefault(sort={"nome"}) Pageable pagina) {
-        return medicoRepository.findAll(pagina)
+        return medicoRepository.findAllByAtivo(pagina, true)
                   .map(MedicoFactory::convertToRegistroMedico);
     }
 
@@ -58,6 +58,7 @@ public class MedicosController {
     @DeleteMapping("/{id}")
     @Transactional
     public void deletar(@PathVariable String id) {
-        medicoRepository.deleteById(Long.parseLong(id));
+        var medico = medicoRepository.getReferenceById(Long.parseLong(id));
+        medico.deletar();
     }
 }

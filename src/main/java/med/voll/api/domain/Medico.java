@@ -1,5 +1,7 @@
 package med.voll.api.domain;
 
+import java.sql.Date;
+
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -44,6 +46,10 @@ public class Medico{
     @NotBlank
     private String telefone;
 
+    private boolean ativo;
+
+    private Date dataExclusao;
+
 
     public void atualizar(Medico medico) {
         this.nome = medico.getNome() == null ? this.nome : medico.getNome();
@@ -52,6 +58,16 @@ public class Medico{
         if(medico.getEndereco() != null){
             this.endereco.atualizar(medico.getEndereco());
         }
+    }
+
+    public void deletar() {
+        this.ativo = false;
+        this.dataExclusao = new Date(System.currentTimeMillis());
+    }
+
+    public void ativar() {
+        this.ativo = true;
+        this.dataExclusao = null;
     }
 
 }
