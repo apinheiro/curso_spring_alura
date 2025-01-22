@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 import med.voll.api.application.domain.MedicoDTO;
 import med.voll.api.application.domain.RegistroMedicoDTO;
 import med.voll.api.domain.repository.MedicoRepository;
-import med.voll.api.infra.factory.MedicoDTOFactory;
+import med.voll.api.infra.factory.MedicoFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/medicos")
@@ -29,19 +32,26 @@ public class MedicosController {
     @PostMapping
     @Transactional
     public void adicionar(@RequestBody @Valid MedicoDTO dadosCadastroMedico) {
-        medicoRepository.save(MedicoDTOFactory.convertFromDto(dadosCadastroMedico));
+        medicoRepository.save(MedicoFactory.convertFromDto(dadosCadastroMedico));
     }
     
     @GetMapping
-/**
- * Lista todos os médicos cadastrados no sistema
- * O retono é uma lista paginada de MedicoDTO, sem a informação do endereço e telefone.
- * 
- * @param pagina
- * @return Page<MedicoDTO>
- */
+    /**
+     * Lista todos os médicos cadastrados no sistema
+     * O retono é uma lista paginada de MedicoDTO, sem a informação do endereço e telefone.
+     * 
+     * @param pagina
+     * @return Page<MedicoDTO>
+     */
     public Page<RegistroMedicoDTO> listar(@PageableDefault(sort={"nome"}) Pageable pagina) {
         return medicoRepository.findAll(pagina)
-                  .map(MedicoDTOFactory::convertToRegistroMedico);
+                  .map(MedicoFactory::convertToRegistroMedico);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void atualizar(@PathVariable String id, @RequestBody @Valid MedicoDTO dadosCadastroMedico) {
+        var medico = medicoRepository.getReferenceById(Long.parseLong(id));
+        medico.atualizar(MedicoFactory.convertFromDto(dadosCadastroMedico));
     }
 }

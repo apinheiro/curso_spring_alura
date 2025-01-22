@@ -9,39 +9,50 @@ public class MedicoBuilder {
     private Endereco endereco;
     private String telefone;
 
-    public MedicoBuilder setId(Long id) {
-        this.id = id;
+    public MedicoBuilder withId(Long id) {
+        this.id = id == null ? this.id : id;
         return this;
     }
 
-    public MedicoBuilder setNome(String nome) {
-        this.nome = nome;
+    public MedicoBuilder withNome(String nome) {
+        this.nome = nome == null ? this.nome : nome;
         return this;
     }
 
-    public MedicoBuilder setEmail(String email) {
-        this.email = email;
+    public MedicoBuilder withEmail(String email) {
+        this.email = email == null ? this.email : email;
         return this;
     }
 
-    public MedicoBuilder setCrm(String crm) {
-        this.crm = crm;
+    public MedicoBuilder withCrm(String crm) {
+        this.crm = crm == null ? this.crm : crm;
         return this;
     }
 
-    public MedicoBuilder setEspecialidade(Especialidades especialidade) {
-        this.especialidade = especialidade;
+    public MedicoBuilder withEspecialidade(Especialidades especialidade) {
+        this.especialidade = especialidade == null ? this.especialidade : especialidade;
         return this;
     }
 
-    public MedicoBuilder setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public MedicoBuilder withEndereco(Endereco endereco) {
+        this.endereco = endereco == null ? this.endereco : endereco;
         return this;
     }
 
-    public MedicoBuilder setTelefone(String telefone) {
-        this.telefone = telefone;
+    public MedicoBuilder withTelefone(String telefone) {
+        this.telefone = telefone == null ? this.telefone : telefone;
         return this;
+    }
+
+    public MedicoBuilder from(Medico medico) {
+        return new MedicoBuilder()
+            .withId(medico.getId())
+            .withNome(medico.getNome())
+            .withEmail(medico.getEmail())
+            .withCrm(medico.getCrm())
+            .withEspecialidade(medico.getEspecialidade())
+            .withEndereco(medico.getEndereco())
+            .withTelefone(medico.getTelefone());
     }
 
     public Medico build() {

@@ -1,29 +1,27 @@
 package med.voll.api.application.domain;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.UpperCase;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import med.voll.api.domain.Especialidades;
 
 public record MedicoDTO(
-    @NotBlank 
     String nome, 
     
-    @NotBlank @Email
+    @Email
     String email, 
 
-    @NotBlank @Pattern(regexp = "\\d{4,6}")
+    @Pattern(regexp = "\\d{4,6}")
     String crm, 
     
-    @NotNull
+    @UpperCase
     Especialidades especialidade, 
     
-    @NotNull @Valid
+    @Valid
     EnderecoDTO endereco,
     
-    @NotBlank
     String telefone) {
 
 }

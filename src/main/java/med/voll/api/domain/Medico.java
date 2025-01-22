@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,10 +26,13 @@ public class Medico{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String nome;
     
+    @NotBlank
     private String email;
     
+    @NotBlank
     private String crm;
     
     @Enumerated(EnumType.STRING)
@@ -38,6 +41,17 @@ public class Medico{
     @Embedded
     private Endereco endereco ;
 
+    @NotBlank
     private String telefone;
+
+
+    public void atualizar(Medico medico) {
+        this.nome = medico.getNome() == null ? this.nome : medico.getNome();
+        this.telefone = medico.getTelefone() == null ? this.telefone : medico.getTelefone();
+
+        if(medico.getEndereco() != null){
+            this.endereco.atualizar(medico.getEndereco());
+        }
+    }
 
 }

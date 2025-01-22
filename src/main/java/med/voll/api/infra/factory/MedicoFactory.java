@@ -8,23 +8,13 @@ import med.voll.api.domain.EnderecoBuilder;
 import med.voll.api.domain.Medico;
 import med.voll.api.domain.MedicoBuilder;
 
-public class MedicoDTOFactory {
+public class MedicoFactory {
+
     public static MedicoDTO convertToDto(Medico medico){
         return new MedicoDTO(medico.getNome(), 
                              medico.getEmail(), 
                              medico.getCrm(), 
                              medico.getEspecialidade(), null, null);
-    }
-
-    public static Medico convertFromDto(MedicoDTO medicoDTO){
-        return new MedicoBuilder()
-                .setNome(medicoDTO.nome())
-                .setEmail(medicoDTO.email())
-                .setCrm(medicoDTO.crm())
-                .setEspecialidade(medicoDTO.especialidade())
-                .setEndereco(setEndereco(medicoDTO.endereco()))
-                .setTelefone(medicoDTO.telefone())
-                .build();
     }
 
     public static RegistroMedicoDTO convertToRegistroMedico(Medico medico){
@@ -34,15 +24,31 @@ public class MedicoDTOFactory {
                                      medico.getEspecialidade(), 
                                      medico.getId());
     }
-       
+
+    public static Medico convertFromDto(MedicoDTO medicoDTO) {
+        if (medicoDTO == null) return null;
+
+        return new MedicoBuilder()
+            .withEndereco(setEndereco(medicoDTO.endereco()))
+            .withNome(medicoDTO.nome())
+            .withEmail(medicoDTO.email())
+            .withCrm(medicoDTO.crm())
+            .withEspecialidade(medicoDTO.especialidade())
+            .withTelefone(medicoDTO.telefone())
+            .build();        
+    }
+
     private static Endereco setEndereco(EnderecoDTO enderecoDTO){
+        if (enderecoDTO == null) return null;
+
         return new EnderecoBuilder()
-                .setCep(enderecoDTO.cep())
-                .setCidade(enderecoDTO.cidade())
-                .setComplemento(enderecoDTO.complemento())
-                .setUf(enderecoDTO.uf())
-                .setLogradouro(enderecoDTO.logradouro())
-                .setNumero(enderecoDTO.numero())
-                .build();
+            .withCep(enderecoDTO.cep())
+            .withCidade(enderecoDTO.cidade())
+            .withComplemento(enderecoDTO.complemento())
+            .withUf(enderecoDTO.uf())
+            .withLogradouro(enderecoDTO.logradouro())
+            .withNumero(enderecoDTO.numero())
+            .withBairro(enderecoDTO.bairro())
+            .build();
     }
 }
