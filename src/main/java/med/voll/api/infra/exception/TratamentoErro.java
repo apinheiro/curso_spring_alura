@@ -1,5 +1,7 @@
 package med.voll.api.infra.exception;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,5 +26,15 @@ public class TratamentoErro {
         return ResponseEntity.badRequest().body(errors);
     }
   
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<Object> tratarErrorSql(Exception ex) {
+
+        String mensagem = ex.getMessage().contains("Duplicate entry") ? "Registro duplicado" : "Erro ao inserir registro";
+
+        return ResponseEntity.badRequest().body(new ValidationError("sql", mensagem));
+    }
+    
     private record ValidationError(String campo, String mensagem) {}
+
+
 }
