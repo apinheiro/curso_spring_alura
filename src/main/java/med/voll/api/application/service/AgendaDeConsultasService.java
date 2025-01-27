@@ -41,6 +41,9 @@ public class AgendaDeConsultasService {
             medico = escolhaMedico(consultaDTO);
             paciente = pacienteRepository.findById(consultaDTO.idPaciente()).get();
 
+            if (medico == null){
+                throw new RuntimeException("Não existe médico disponível para esta data.");
+            }
         }catch(NoSuchElementException e){
             throw new RuntimeException("Paciente não encontrado.", e);
         }catch(RuntimeException e){
@@ -48,11 +51,8 @@ public class AgendaDeConsultasService {
         }
 
         validadores.forEach(v -> v.validar(consultaDTO));
-
         Consulta consulta = new Consulta(null, medico, paciente, consultaDTO.data());
-
         consultaRepository.save(consulta);
-
         return ConsultaFactory.criarConsultaDTO(consulta);
     }
 
