@@ -33,6 +33,11 @@ public class TratamentoErro {
 
         return ResponseEntity.badRequest().body(new ValidationError("sql", mensagem));
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Object> tratarErroRuntime(RuntimeException ex) {
+        return ResponseEntity.badRequest().body(new ValidationError("runtime error", ex.getMessage()));
+    }
     
     private record ValidationError(String campo, String mensagem) {}
 

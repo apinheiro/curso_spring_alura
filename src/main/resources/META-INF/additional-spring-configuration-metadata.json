@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "app.security.jwt.secret",
-  "type": "java.lang.String",
-  "description": "Chave secreta da API"
-}]}
+{"properties": [
+  {
+    "name": "app.security.jwt.secret",
+    "type": "java.lang.String",
+    "description": "Chave secreta da API"
+  },
+  {
+    "name": "app.consulta.antecedencia",
+    "type": "java.lang.String",
+    "description": "A description for 'app.consulta.antecedencia'"
+  }
+]}
