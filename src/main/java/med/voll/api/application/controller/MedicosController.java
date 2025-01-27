@@ -45,7 +45,6 @@ public class MedicosController {
         Medico medico = MedicoFactory.convertFromDto(dadosCadastroMedico);
 
         medicoRepository.save(medico);
-
         URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
 
         return ResponseEntity.created(uri).body(MedicoFactory.convertToDto(medico));

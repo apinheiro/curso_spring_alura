@@ -32,11 +32,9 @@ public class AutenticacaoController {
     public ResponseEntity<TokenDTO> efetuarLogin(@RequestBody @Valid AutenticacaoDTO auth) {
 
         var authToken = new UsernamePasswordAuthenticationToken(auth.login(), auth.senha());
-
         var autentication = manager.authenticate(authToken);
 
         String token = tokenService.gerarToken((Usuario) autentication.getPrincipal());
-
         return ResponseEntity.ok(new TokenDTO(token));
     }
 }
