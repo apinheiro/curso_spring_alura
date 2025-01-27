@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "app.security.jwt.secret",
+  "type": "java.lang.String",
+  "description": "Chave secreta da API"
+}]}
