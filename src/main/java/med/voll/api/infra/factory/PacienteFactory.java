@@ -36,6 +36,7 @@ public class PacienteFactory {
             .withCpf(pacienteDTO.cpf())
             .withTelefone(pacienteDTO.telefone())
             .withId(pacienteDTO.id())
+            .withAtivo(true)
             .build();        
     }
 
