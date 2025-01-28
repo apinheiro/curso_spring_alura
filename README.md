@@ -1,19 +1,50 @@
-# API VolMed 
+## 💻 Sobre o projeto
 
-## Introdução
+Voll.med é uma clínica médica fictícia que precisa de um aplicativo para gestão de consultas. O aplicativo deve possuir funcionalidades que permitam o cadastro de médicos e de pacientes, e também o agendamento e cancelamento de consultas.
 
-Este é um simples sistema de controle de consultas médicas. O código fonte foi gerado a partir do curso de Spring Boot da Alura.
+Enquanto um time de desenvolvimento será responsável pelo aplicativo mobile, o nosso será responsável pelo desenvolvimento da API Rest desse projeto.
 
-## Sobre o projeto
+---
 
-A formação Spring Boot da Alura é feito através da criação de uma aplicação que simula um sistema de cadastro de consultas médicas, onde há a manutenção de médicos, pacientes e consultas.
+## ⚙️ Funcionalidades
 
-O resultado é uma API para manter tais informações no sistema.
+- [x] CRUD de médicos;
+- [x] CRUD de pacientes;
+- [ ] Agendamento de consultas(em breve);
+- [ ] Cancelamento de consultas(em breve);
 
-Para maiores detalhes, você pode consultar o [Curso de Spring Boot da Alura](https://www.alura.com.br/formacao-spring-boot-3?srsltid=AfmBOoqYcmcJYqW2h7Xbk1efNFQaIuxpmCZyqWBvnWMjbr3VingqvMH4})
+---
 
-## Tecnologias Utilizadas
+## 🎨 Layout
 
-- Linguagem de Programação: Java 21
-- Framework: Spring Boot 3.4
-- Banco de Dados: Mysql
+O layout da aplicação mobile está disponível neste link: <a href="https://www.figma.com/file/N4CgpJqsg7gjbKuDmra3EV/Voll.med">Figma</a>
+
+---
+
+## 📄 Documentação
+
+A documentação das funcionalidades da aplicação pode ser acessada neste link: <a href="https://trello.com/b/O0lGCsKb/api-voll-med">Trello</a>
+
+---
+
+## 🛠 Tecnologias
+
+As seguintes tecnologias foram utilizadas no desenvolvimento da API Rest do projeto:
+
+- **[Java 17](https://www.oracle.com/java)**
+- **[Spring Boot 3](https://spring.io/projects/spring-boot)**
+- **[Maven](https://maven.apache.org)**
+- **[MySQL](https://www.mysql.com)**
+- **[Hibernate](https://hibernate.org)**
+- **[Flyway](https://flywaydb.org)**
+- **[Lombok](https://projectlombok.org)**
+
+---
+
+## 📝 Licença
+
+Projeto desenvolvido por [Alura](https://www.alura.com.br) e utilizado nos cursos de Spring Boot.
+
+Instrutor: [Rodrigo Ferreira](https://cursos.alura.com.br/user/rodrigo-ferreira) 
+
+---
